@@ -4,9 +4,12 @@ class Publisher < ActiveRecord::Base
    
    #<!-- Accessors -->
 #   attr_accessor :publisher_name
+  
+   before_save { self.name = name.downcase }
 
    #<!-- Validate the publisher name -->
-   validates :name, presence: true, length: {maximum: 255}
+   validates :name, presence: true, length: {maximum: 255},
+                    uniqueness: { case_sensitive: false }
    
    #<!-- Initializer with required and optional information when creating a new Publisher -->
  #  def initialize(name)

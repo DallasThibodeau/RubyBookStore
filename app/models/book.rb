@@ -7,11 +7,14 @@ class Book < ActiveRecord::Base
 #                 :book_user, :book_publishers, :book_num_of_pages, 
 #                 :book_edition, :book_isHardcover 
    
+   before_save { self.title = email.title }
+   
    #<!-- Serialize the object for the database -->
    serialize :user, :authors, :publishers
 
    #<!-- Validate the book title -->
-   validates :title, presence: true, length: {maximum: 50}
+   validates :title, presence: true, length: {maximum: 50},
+                     uniqueness: { case_sensitive: false }
    
    #<!-- Validate the book authors -->
    validate :authors, presence: true

@@ -19,7 +19,8 @@ class Ad < ActiveRecord::Base
                      format: {with: VALID_PRICE_REGEX}
                      
    #<!-- Validate the ad title -->
-   validates :title, presence: true, length: {maximum: 50}   
+   validates :title, presence: true, length: {maximum: 50},
+                     uniqueness: { case_sensitive: true }   
    
    #<!-- Validate the ad user -->
    validates :user, presence: true
