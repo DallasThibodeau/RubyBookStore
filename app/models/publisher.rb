@@ -3,10 +3,10 @@ class Publisher < ActiveRecord::Base
    @@no_of_publisher=0
    
    #<!-- Accessors -->
-   attr_accessor :publisher_name
+#   attr_accessor :publisher_name
    
    #<!-- Initializer with required and optional information when creating a new Publisher -->
-   def initialize(name)
-     @publisher_name = name
-   end
+ #  def initialize(name)
+ #    @publisher_name = name
+ #  end
 end
