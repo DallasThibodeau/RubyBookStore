@@ -1,4 +1,4 @@
-class Author
+class Author < ActiveRecord::Base
    #<!-- Number of Author objects -->
    @@no_of_authors=0
    
@@ -6,8 +6,7 @@ class Author
    attr_accessor :author_id, :author_first_name, :author_last_name
    
    #<!-- Initializer with required and optional information when creating a new Author -->
-   def initialize(id, last_name, options = {})
-     @author_id = id
+   def initialize(last_name, options = {})
      @author_first_name[:first_name] || ''
      @author_last_name = last_name
    end

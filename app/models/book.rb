@@ -1,4 +1,4 @@
-class Book
+class Book < ActiveRecord::Base
    #<!-- Number of book objects -->
    @@no_of_books=0
    
@@ -7,9 +7,11 @@ class Book
                  :book_user, :book_publishers, :book_num_of_pages, 
                  :book_edition, :book_isHardcover 
    
+   #<!-- Serialize the object for the database -->
+   serialize :book_user, :book_authors, :book_publishers
+   
    #<!-- Initializer with required and optional information when creating a new book -->
-   def initialize(id, title, authors, user, options = {})
-     @book_id = id
+   def initialize(title, authors, user, options = {})
      @book_title = title
      @book_authors = authors
      @book_user = user
