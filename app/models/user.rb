@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
    #<!-- Number of User objects -->
    @@no_of_users=0
    
@@ -8,7 +12,7 @@ class User < ActiveRecord::Base
 #                 :user_phone, :user_isAdmin
    
    #<!-- Change email to lower case before it enters the db -->
-   before_save { self.email = email.downcase }
+   before_save { self.email = email.downcase}
  
    #<!-- Validates the email -->
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -19,10 +23,10 @@ class User < ActiveRecord::Base
    #<!-- Validate the user names -->
    validates :first_name, length: {maximum: 50}
    validates :last_name, length: {maximum: 50}
-   validates :nickname, lenght: {maximum: 50}
+   validates :nickname, length: {maximum: 50}
    
    #<!-- Validates the user phone number -->
-   VALID_PHONENUMBER_REGEX = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/i
+   VALID_PHONENUMBER_REGEX = /\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z/i
    validates :phone, length: { maximum: 20 },
                      format: {with: VALID_PHONENUMBER_REGEX}
    
@@ -30,6 +34,9 @@ class User < ActiveRecord::Base
    VALID_ADDRESS_REGEX = /\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\./i
    validates :address, length: { maximum: 50 },
                        format: {with: VALID_ADDRESS_REGEX} 
+                       
+   #<!-- Validate password -->    
+   validates :password, presence: true, length: { minimum: 6 }
    
    #<!-- Initializer with required and optional information when creating a new User -->
  #  def initialize(email, options = {})
