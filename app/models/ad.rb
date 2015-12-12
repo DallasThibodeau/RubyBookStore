@@ -15,7 +15,7 @@ class Ad < ActiveRecord::Base
      @ad_price = price
      @ad_title = title
      @ad_user = user
-     @ad_tags = options[:tags] || {''}
+     @ad_tags = options[:tags] || ''
      @ad_description = options[:description] || ''
    end
 end
