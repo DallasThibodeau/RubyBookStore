@@ -16,6 +16,21 @@ class User < ActiveRecord::Base
                      format: { with: VALID_EMAIL_REGEX },
                      uniqueness: { case_sensitive: false }
    
+   #<!-- Validate the user names -->
+   validates :first_name, length: {maximum: 50}
+   validates :last_name, length: {maximum: 50}
+   validates :nickname, lenght: {maximum: 50}
+   
+   #<!-- Validates the user phone number -->
+   VALID_PHONENUMBER_REGEX = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/i
+   validates :phone, length: { maximum: 20 },
+                     format: {with: VALID_PHONENUMBER_REGEX}
+   
+   #<!-- Validates the user address -->
+   VALID_ADDRESS_REGEX = /\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\./i
+   validates :address, length: { maximum: 50 },
+                       format: {with: VALID_ADDRESS_REGEX} 
+   
    #<!-- Initializer with required and optional information when creating a new User -->
  #  def initialize(email, options = {})
  #    @user_email = email
