@@ -4,6 +4,9 @@ class Publisher < ActiveRecord::Base
    
    #<!-- Accessors -->
 #   attr_accessor :publisher_name
+
+   #<!-- Validate the publisher name -->
+   validates :name, presence: true, length: {maximum: 255}
    
    #<!-- Initializer with required and optional information when creating a new Publisher -->
  #  def initialize(name)

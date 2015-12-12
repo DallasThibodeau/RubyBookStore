@@ -9,6 +9,21 @@ class Ad < ActiveRecord::Base
    #<!-- Serialize the objects for the database -->
    serialize :user, :tags
    
+   #<!-- Validate the ad book -->
+   validates :book, presence: true
+   
+   #<!-- Validate the ad price -->
+   #Allows for optional comma and decimal
+   VALID_PRICE_REGEX = /(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/i
+   validates :price, presence: true, length: { maximum: 4 },
+                     format: {with: VALID_PRICE_REGEX}
+                     
+   #<!-- Validate the ad title -->
+   validates :title, presence: true, length: {maximum: 50}   
+   
+   #<!-- Validate the ad user -->
+   validates :user, presence: true
+   
    #<!-- Initializer with required and optional information when creating a new Ad -->
 #   def initialize(book, price, title, date_posted, user, options = {})
 #     @ad_book = book

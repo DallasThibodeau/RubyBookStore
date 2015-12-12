@@ -4,6 +4,10 @@ class Author < ActiveRecord::Base
    
    #<!-- Accessors -->
  #  attr_accessor :author_id, :author_first_name, :author_last_name
+      
+   #<!-- Validate the user names -->
+   validates :first_name, presence: true, length: {maximum: 50}
+   validates :last_name, presence: true, length: {maximum: 50}
    
    #<!-- Initializer with required and optional information when creating a new Author -->
 #   def initialize(last_name, options = {})

@@ -10,6 +10,15 @@ class Book < ActiveRecord::Base
    #<!-- Serialize the object for the database -->
    serialize :user, :authors, :publishers
 
+   #<!-- Validate the book title -->
+   validates :title, presence: true, length: {maximum: 50}
+   
+   #<!-- Validate the book authors -->
+   validate :authors, presence: true
+   
+   #<!-- Validate the book user -->
+   validate :user, presence: true 
+
    #<!-- Initializer with required and optional information when creating a new book -->
 #   def initialize(title, authors, user, options = {})
 #     @book_title = title
