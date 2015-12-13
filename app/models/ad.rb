@@ -1,26 +1,27 @@
 class Ad < ActiveRecord::Base
    #<!-- Number of ad objects -->
    @@no_of_ads=0
-   
-   #<!-- Accessors -->
- #  attr_accessor :ad_id, :ad_book, :ad_price, :ad_tags, :ad_title,
- #                :ad_description, :ad_user
-   
+ 
    belongs_to :user             
-   has_one :image, :book, dependent: :destroy              
+   has_one :book, dependent: :destroy              
+        
+    validates :picture, :attachment_presence => true
+    validates :user_id, presence: true      
                  
-   before_save {
-      img = Image.new(picture: :picture)
-      img.save!                  
+    mount_uploader :picture, PictureUploader
+   
+    validates_attachment_size :picture, :less_than => 10.megabytes   
+    validates_attachment_presence :picture
+    
+    #added for paperclip-drop gem   
+    has_attached_file :picture,
+    :storage => :dropbox,
+    :dropbox_credentials => "#{Rails.root}/config/dropbox_config.yml",
+    :styles => { :medium => "300x300" , :thumb => "100x100>"},    
+    :dropbox_options => {
+      :path => proc { |style| "#{style}/#{id}_#{picture.original_filename}"},       
+      :unique_filename => true   
     }
-                 
-   mount_uploader :picture, PictureUploader
-   
-   #<!-- Serialize the objects for the database -->
-   serialize :picture
-   
-   #<!-- Validate the ad book -->
-   #validates :book, presence: true
    
    #<!-- Validate the ad price -->
    #Allows for optional comma and decimal
@@ -31,17 +32,4 @@ class Ad < ActiveRecord::Base
    #<!-- Validate the ad title -->
    validates :title, presence: true, length: {maximum: 50},
                      uniqueness: { case_sensitive: true }   
-   
-   #<!-- Validate the ad user -->
-   validates :user, presence: true
-   
-   #<!-- Initializer with required and optional information when creating a new Ad -->
-#   def initialize(book, price, title, date_posted, user, options = {})
-#     @ad_book = book
-#     @ad_price = price
-#     @ad_title = title
-#     @ad_user = user
-#     @ad_tags = options[:tags] || ''
-#     @ad_description = options[:description] || ''
-#   end
 end
