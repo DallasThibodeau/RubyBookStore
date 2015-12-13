@@ -8,7 +8,7 @@ class Author < ActiveRecord::Base
    before_save { self.last_name = last_name.downcase }
       
    #<!-- Validate the user names -->
-   validates :first_name, length: {maximum: 50}
+   validates :first_name, :allow_blank => true, length: {maximum: 50}
    validates :last_name, presence: true, length: {maximum: 50},
                          uniqueness: { case_sensitive: false }
    
