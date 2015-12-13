@@ -27,8 +27,12 @@ gem 'bootstrap-sass',       '3.3.6'
 #For user authentication
 gem 'devise'
 
+#For image uploading
+gem 'carrierwave'
+
 #For image storage
 gem "paperclip", "~> 4.1.1"
+gem "paperclip-dropbox"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

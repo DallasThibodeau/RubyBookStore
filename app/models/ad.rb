@@ -25,6 +25,17 @@ class Ad < ActiveRecord::Base
    #<!-- Validate the ad user -->
    validates :user, presence: true
    
+  attr_accessible :picture, :verified, :category, :tags, :user_id  
+  #added for paperclip-drop gem   
+  has_attached_file :picture,
+  :storage => :dropbox,
+  :dropbox_credentials => "#{Rails.root}/config/dropbox_config.yml",
+  :styles => { :medium => "300x300" , :thumb => "100x100>"},    
+  :dropbox_options => {
+    :path => proc { |style| "#{style}/#{id}_#{picture.original_filename}"},       
+    :unique_filename => true   
+  }
+   
    #<!-- Initializer with required and optional information when creating a new Ad -->
 #   def initialize(book, price, title, date_posted, user, options = {})
 #     @ad_book = book
