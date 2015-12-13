@@ -1,5 +1,5 @@
 <li id="bigAd-<%= ad.id %>">
-  <%= link_to gravatar_for(ad.user, size: 50), ad.user %>
+  <%= image_tag ad.picture.url if ad.picture? %>
   <span class="title"><%=ad.title %></span>
   <span class="nickname"><%=ad.user.nickname %></span>
   <span class="tags"><%= ad.tags %></span>
