@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
    #<!-- Number of User objects -->
    @@no_of_users=0
    
+   has_many :ad, dependent: :destroy 
+   
    #<!-- Accessors -->
 #   attr_accessor :user_id, :user_first_name, :user_last_name, 
 #                 :user_nickname, :user_email, :user_address, 
