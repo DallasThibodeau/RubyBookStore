@@ -11,50 +11,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212195337) do
+ActiveRecord::Schema.define(version: 20151213041816) do
 
   create_table "ads", force: :cascade do |t|
-    t.string   "book"
     t.string   "price"
-    t.string   "tags"
     t.string   "title"
     t.string   "description"
-    t.string   "user"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   add_index "ads", ["title"], name: "index_ads_on_title", unique: true
+  add_index "ads", ["user_id"], name: "index_ads_on_user_id"
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "authors", ["book_id"], name: "index_authors_on_book_id"
   add_index "authors", ["last_name"], name: "index_authors_on_last_name", unique: true
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
-    t.string   "authors"
-    t.string   "user"
-    t.string   "publishers"
     t.integer  "num_of_pages"
     t.integer  "edition"
     t.boolean  "isHardcover"
+    t.integer  "ad_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
+  add_index "books", ["ad_id"], name: "index_books_on_ad_id"
   add_index "books", ["title"], name: "index_books_on_title", unique: true
 
-  create_table "publishers", force: :cascade do |t|
-    t.string   "name"
+  create_table "images", force: :cascade do |t|
+    t.integer  "ad_id"
+    t.string   "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "images", ["ad_id"], name: "index_images_on_ad_id"
+
+  create_table "publishers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "publishers", ["book_id"], name: "index_publishers_on_book_id"
   add_index "publishers", ["name"], name: "index_publishers_on_name", unique: true
 
   create_table "users", force: :cascade do |t|

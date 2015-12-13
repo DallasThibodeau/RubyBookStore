@@ -6,6 +6,8 @@ class Author < ActiveRecord::Base
  #  attr_accessor :author_id, :author_first_name, :author_last_name
  
    before_save { self.last_name = last_name.downcase }
+   
+   belongs_to :book
       
    #<!-- Validate the user names -->
    validates :first_name, :allow_blank => true, length: {maximum: 50}

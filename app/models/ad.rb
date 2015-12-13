@@ -5,12 +5,15 @@ class Ad < ActiveRecord::Base
    #<!-- Accessors -->
  #  attr_accessor :ad_id, :ad_book, :ad_price, :ad_tags, :ad_title,
  #                :ad_description, :ad_user
+   
+   belongs_to :user             
+   has_one :image, :book, dependent: :destroy              
                  
    #<!-- Serialize the objects for the database -->
-   serialize :user, :tags
+   #serialize :user, :tags
    
    #<!-- Validate the ad book -->
-   validates :book, presence: true
+   #validates :book, presence: true
    
    #<!-- Validate the ad price -->
    #Allows for optional comma and decimal
