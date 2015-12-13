@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'users/new'
+  devise_scope :user do
+    authenticated :user do
+      root 'static_pages#home', as: :authenticated_root
+    end
+    
+    unauthenticated :user do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
 
   get 'help' => 'static_pages#help'
 
@@ -10,7 +18,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static_pages#home'
+  #root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
