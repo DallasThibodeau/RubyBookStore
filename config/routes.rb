@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   
+  get 'upload_Ad' => 'static_pages#upload_Ad'
+  
   resources :ads,          only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

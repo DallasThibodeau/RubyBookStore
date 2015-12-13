@@ -13,9 +13,9 @@
     <%= link_to "CUBSS", '#', id: "logo" %>
 	<nav>
 		<ul class="nav navbar-nav navbar-right">
+		  	<li><%= link_to('Create Ad', 'upload_Ad')  %></li>
 		  	<%= render 'devise/menu/registration_items' %>
 		  	<%= render 'devise/menu/login_items' %>
-		  	<%= render 'static_pages/upload_Ad' %>
 		  	<form class="navbar-form" role="search">
 	        <div class="input-group">
 	            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">

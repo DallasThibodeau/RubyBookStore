@@ -7,8 +7,6 @@ class Ad < ActiveRecord::Base
         
     validates :picture, :attachment_presence => true
     validates :user_id, presence: true      
-                 
-    mount_uploader :picture, PictureUploader
    
     validates_attachment_size :picture, :less_than => 10.megabytes   
     validates_attachment_presence :picture
