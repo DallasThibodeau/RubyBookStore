@@ -2,15 +2,22 @@
 <html>
 <head>
   <title>BookStore</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 </head>
-<body>
 
-  <%= render 'devise/menu/registration_items' %>
-  <%= render 'devise/menu/login_items' %>
-	
+<body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+	<div class="container">
+	<nav>
+		<ul class="nav navbar-nav navbar-right">
+		  <%= render 'devise/menu/registration_items' %>
+		  <%= render 'devise/menu/login_items' %>
+		</ul>
+    </nav>
+	</div>
+</header>
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
@@ -18,7 +25,9 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>
