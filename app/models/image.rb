@@ -3,11 +3,14 @@ class Image < ActiveRecord::Base
     
     validates :picture, :attachment_presence => true 
     
-    validates :tags, :presence =>true
+    #validates :tags, :presence =>true
     
-    validates :category, :presence => true    
+    #validates :category, :presence => true    
     
     belongs_to :ad
+    
+    validates_attachment_size :picture, :less_than => 10.megabytes   
+    validates_attachment_presence :picture
     
     #added for paperclip-drop gem   
     has_attached_file :picture,

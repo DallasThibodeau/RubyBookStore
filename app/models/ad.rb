@@ -9,8 +9,15 @@ class Ad < ActiveRecord::Base
    belongs_to :user             
    has_one :image, :book, dependent: :destroy              
                  
+   before_save {
+      img = Image.new(picture: :picture)
+      img.save!                  
+    }
+                 
+   mount_uploader :picture, PictureUploader
+   
    #<!-- Serialize the objects for the database -->
-   #serialize :user, :tags
+   serialize :picture
    
    #<!-- Validate the ad book -->
    #validates :book, presence: true
