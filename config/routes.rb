@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   
-  get 'upload_Ad' => 'static_pages#upload_Ad'
+  get 'create_ad' => 'ads#_ad_form'
   
   resources :ads,          only: [:create, :destroy]
 

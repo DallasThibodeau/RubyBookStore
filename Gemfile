@@ -35,7 +35,7 @@ gem 'devise'
 gem 'carrierwave'
 
 #For image storage
-gem "paperclip", "~> 4.1.1"
+gem "paperclip", github: "thoughtbot/paperclip"
 gem "paperclip-dropbox"
 
 # Use ActiveModel has_secure_password

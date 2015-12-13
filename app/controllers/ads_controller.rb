@@ -6,7 +6,7 @@ class AdsController < ApplicationController
     @ad = current_user.ads.build(ad_params)
     if @ad.save
       flash[:success] = "Ad created!"
-      redirect_to @ad
+      redirect_to 'static_pages/home'
     else
       @feed_items = []
       render 'static_pages/home'
@@ -22,7 +22,7 @@ class AdsController < ApplicationController
   private
 
     def ad_params
-      params.require(:ad).permit(:title, :picture)
+      params.require(:ad).permit(:title, :price, :picture)
     end
 
     def correct_user
