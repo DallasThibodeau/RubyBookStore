@@ -30,7 +30,7 @@ class AdsController < ApplicationController
     end
 
     def correct_user
-      @ad = current_user.ads.find_by(id: params[:id])
+      @ad = current_user.ad.find_by(id: params[:id])
       redirect_to root_url if @ad.nil?
     end
 end

@@ -11,17 +11,18 @@ class Book < ActiveRecord::Base
    
    #<!-- Serialize the object for the database -->
    belongs_to :ad
-   has_many :authors, :publishers, dependent: :destroy 
+   has_many :authors, dependent: :destroy 
+   has_many :publishers, dependent: :destroy 
 
    #<!-- Validate the book title -->
    validates :title, presence: true, length: {maximum: 50},
                      uniqueness: { case_sensitive: false }
    
    #<!-- Validate the book authors -->
-   validate :authors, presence: true
+   validates :authors, presence: true
    
    #<!-- Validate the book user -->
-   validate :user, presence: true 
+   validates :user, presence: true 
 
    #<!-- Initializer with required and optional information when creating a new book -->
 #   def initialize(title, authors, user, options = {})

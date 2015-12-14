@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about'
   
   get 'create_ad' => 'ads#_ad_form'
+  get 'full_ad' => 'ads#_full_ad'
   
   get 'edit_profile' => 'static_pages#additionalForm'
   
