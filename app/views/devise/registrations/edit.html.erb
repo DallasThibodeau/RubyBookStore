@@ -2,15 +2,15 @@
 
 <div class="container">
 	<div>
-		<p>First Name: </p><span class="First Name"><%=@user.first_name %></span>
-		<p>Last Name:  </p><span class="Last Name"><%=@user.last_name %></span>
-		<p>Nickname:   </p><span class="Nickname"><%=@user.nickname %></span>
-		<p>Address:    </p><span class="Address"><%=@user.address %></span>
-		<p>Phone:      </p><span class="Phone"><%=@user.phone %></span>
-	</span>
+		<p>First Name: <%=@user.first_name %>
+		<p>Last Name:  <%=@user.last_name %>
+		<p>Nickname:   <%=@user.nickname %>
+		<p>Address:    <%=@user.address %>
+		<p>Phone:      <%=@user.phone %>
+	</span><br/>
 	<%= link_to('Edit Profile', edit_profile_path)  %>
 	</div>
-</div>
+</div><br/><br/>
     
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>

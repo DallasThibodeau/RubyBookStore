@@ -12,6 +12,6 @@ class StaticPagesController < ApplicationController
   def about    
   end
   
-  def _additionalForm    
+  def additionalForm   
   end
 end

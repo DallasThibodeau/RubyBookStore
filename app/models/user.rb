@@ -33,9 +33,9 @@ class User < ActiveRecord::Base
                      format: {with: VALID_PHONENUMBER_REGEX}
    
    #<!-- Validates the user address -->
-   VALID_ADDRESS_REGEX = /\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\./i
-   validates :address, :allow_blank => true, length: { maximum: 50 },
-                       format: {with: VALID_ADDRESS_REGEX} 
+   #VALID_ADDRESS_REGEX = /\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\./i
+   validates :address, :allow_blank => true, length: { maximum: 50 }#,
+                       #format: {with: VALID_ADDRESS_REGEX} 
                        
    #<!-- Validate password -->    
    validates :password, presence: true, length: { minimum: 6 }
