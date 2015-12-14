@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   
   get 'create_ad' => 'ads#_ad_form'
   
+  #this route is for file downloads 
+  match 'ads/get/:id' => 'ads#get'
+  
   resources :ads,          only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

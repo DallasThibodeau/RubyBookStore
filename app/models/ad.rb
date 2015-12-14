@@ -4,20 +4,7 @@ class Ad < ActiveRecord::Base
  
    belongs_to :user             
    has_one :book, dependent: :destroy               
-   
-    has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-    validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/    
-      
-    validates_attachment_size :picture, :less_than => 10.megabytes   
-    validates_attachment_presence :picture
-    
-    #validates :picture, :attachment_presence => true
-    validates :user_id, presence: true  
-   
-    #validates_attachment_size :picture, :less_than => 10.megabytes   
-    #validates_attachment_presence :picture
-    #validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
-    
+       
     #added for paperclip-drop gem   
     #has_attached_file :picture,
     #:storage => :dropbox,
@@ -27,16 +14,29 @@ class Ad < ActiveRecord::Base
     #  :path => proc { |style| "#{style}/#{id}_#{picture.original_filename}"},       
     #  :unique_filename => true   
     #}
+  has_attached_file :picture,
+                    :url => "/ads/get/:id", 
+                    :path => ":Rails_root/ads/:id/:basename.:extension"
+    
+  validates_attachment_content_type :picture, :content_type => /\Aimage/
+  #validates_attachment_file_name :picture, :matches => [/png\Z/, /jpe?g\Z/]    
+  #do_not_validate_attachment_file_type :picture    
+  validates_attachment_size :picture, :less_than => 10.megabytes   
+  validates_attachment_presence :picture
+  validates :user_id, presence: true
+   
+    #validates_attachment_size :picture, :less_than => 10.megabytes   
+    #validates_attachment_presence :picture
+    #validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
    
    #<!-- Validate the ad price -->
    #Allows for optional comma and decimal
    VALID_PRICE_REGEX = /\A(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$\Z/i
-   validates :price, presence: true, length: { maximum: 4 },
+   validates :price, presence: true,
                      format: {with: VALID_PRICE_REGEX}
                      
    #<!-- Validate the ad title -->
-   validates :title, presence: true, length: {maximum: 50},
-                     uniqueness: { case_sensitive: true }   
+   validates :title, presence: true, length: {maximum: 50}   
                      
                         #<!-- Validate the ad title -->
    validates :description, presence: true, length: {maximum: 255} 

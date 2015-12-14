@@ -33,6 +33,7 @@ gem 'devise'
 
 #For image uploading
 gem 'carrierwave'
+gem 'mini_magick',             '3.8.0'
 
 #For image storage
 gem "paperclip", github: "thoughtbot/paperclip"
