@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   
   get 'create_ad' => 'ads#_ad_form'
   
+  get 'edit_profile' => 'static_pages#_additionalForm'
+  
   #this route is for file downloads 
   #match 'ads/get/:id' => 'ads#get'
   
