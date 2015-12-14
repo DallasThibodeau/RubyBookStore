@@ -10,10 +10,10 @@ class AdsController < ApplicationController
     @ad = current_user.ad.build(ad_params)
     if @ad.save!
       flash[:success] = "Ad created!"
-      render 'static_pages/home'
+      redirect_to home_path
     else
       @feed_items = []
-      render 'static_pages/home'
+      redirect_to home_path
     end
   end
 

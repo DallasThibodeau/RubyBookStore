@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'help' => 'static_pages#help'
+  get 'home' => 'static_pages#home'
 
   get 'about' => 'static_pages#about'
   

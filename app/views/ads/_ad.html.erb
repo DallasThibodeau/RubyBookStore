@@ -2,7 +2,7 @@
   <span class="content">
 	<h2><%= ad.title %></h2><br/>
     <%= image_tag ad.picture.url if ad.picture? %>&nbsp;&nbsp;
-    <%= ad.price %>
+    <%= '$'+ad.price %>
   </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(ad.created_at) %> ago.
