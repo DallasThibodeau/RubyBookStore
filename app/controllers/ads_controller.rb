@@ -8,9 +8,9 @@ class AdsController < ApplicationController
 
   def create
     @ad = current_user.ad.build(ad_params)
-    if @ad.save
+    if @ad.save!
       flash[:success] = "Ad created!"
-      redirect_to 'static_pages/home'
+      render 'static_pages/home'
     else
       @feed_items = []
       render 'static_pages/home'
@@ -21,13 +21,6 @@ class AdsController < ApplicationController
     @ad.destroy
     flash[:success] = "Ad deleted"
     redirect_to request.referrer || 'static_pages/home'
-  end
-  
-  def get 
-    ad = current_user.ads.find_by_id(params[:id]) 
-    if ad
-      
-    end
   end
 
   private

@@ -14,16 +14,26 @@ class Ad < ActiveRecord::Base
     #  :path => proc { |style| "#{style}/#{id}_#{picture.original_filename}"},       
     #  :unique_filename => true   
     #}
-  has_attached_file :picture,
-                    :url => "/ads/get/:id", 
-                    :path => ":Rails_root/ads/:id/:basename.:extension"
+    
+    has_attached_file :picture,
+    :storage => :dropbox,
+    :dropbox_credentials => Rails.root.join("config/dropbox_config.yml"),
+    :dropbox_options => {:path => proc { |style| "files/#{id}/#{picture.original_filename}" } }
+
+  validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+=begin
+  has_attached_file :picture#,
+                    #:url => "/ads/get/:id", 
+                    #:path => ":Rails_root/ads/:id/:basename.:extension"
     
   validates_attachment_content_type :picture, :content_type => /\Aimage/
-  #validates_attachment_file_name :picture, :matches => [/png\Z/, /jpe?g\Z/]    
+  #validates_attachment_file_name :picture, :matches => [/png\Z/, /jpe?g\Z/]
+=end    
   #do_not_validate_attachment_file_type :picture    
   validates_attachment_size :picture, :less_than => 10.megabytes   
   validates_attachment_presence :picture
   validates :user_id, presence: true
+ 
    
     #validates_attachment_size :picture, :less_than => 10.megabytes   
     #validates_attachment_presence :picture
@@ -36,7 +46,8 @@ class Ad < ActiveRecord::Base
                      format: {with: VALID_PRICE_REGEX}
                      
    #<!-- Validate the ad title -->
-   validates :title, presence: true, length: {maximum: 50}   
+   validates :title, presence: true, length: {maximum: 50}#,
+                     #uniqueness: { case_sensitive: false }   
                      
                         #<!-- Validate the ad title -->
    validates :description, presence: true, length: {maximum: 255} 

@@ -4,4 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   #Authenricate user before any action is taken.
   before_action :authenticate_user!
+  
+  include ApplicationHelper
 end

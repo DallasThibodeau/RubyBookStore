@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
    #<!-- Validate password -->    
    validates :password, presence: true, length: { minimum: 6 }
    
+   def feed
+    Ad.where("user_id = ?", id)
+   end
+   
    #<!-- Initializer with required and optional information when creating a new User -->
  #  def initialize(email, options = {})
  #    @user_email = email

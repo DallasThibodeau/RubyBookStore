@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213175358) do
+ActiveRecord::Schema.define(version: 20151214030221) do
 
   create_table "ads", force: :cascade do |t|
     t.string   "price"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20151213175358) do
     t.datetime "picture_updated_at"
   end
 
-  add_index "ads", ["title"], name: "index_ads_on_title", unique: true
   add_index "ads", ["user_id"], name: "index_ads_on_user_id"
 
   create_table "authors", force: :cascade do |t|

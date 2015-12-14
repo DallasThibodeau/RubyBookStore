@@ -1,16 +1,15 @@
-<% provide(:title, @user.name) %>
+
 <div class="row">
   <aside class="col-md-4">
     <section class="ad_snippet">
       <h1>
-        <%= gravatar_for @user %>
         <%= @ad.id %>
       </h1>
     </section>
   </aside>
   <div class="col-md-8">
-    <% if @user.ads.any? %>
-      <h3>Ads (<%= @user.ads.count %>)</h3>
+    <% if @user.ad.any? %>
+      <h3>Ads (<%= @user.ad.count %>)</h3>
       <ol class="ads">
         <%= render @ads %>
       </ol>
