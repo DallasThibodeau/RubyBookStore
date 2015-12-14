@@ -37,8 +37,9 @@ class User < ActiveRecord::Base
    validates :address, :allow_blank => true, length: { maximum: 50 }#,
                        #format: {with: VALID_ADDRESS_REGEX} 
                        
-   #<!-- Validate password -->    
-   validates :password, presence: true, length: { minimum: 6 }
+   #<!-- Validate password --> 
+   validates :password, presence: true, length: { minimum: 6 }, on: :create
+   validates :password, length: {minimum: 6, maximum: 120}, on: :update, allow_blank: true
    
    def feed
     Ad.where("user_id = ?", id)
