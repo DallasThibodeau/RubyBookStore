@@ -4,12 +4,20 @@
   <div class="col-md-6 col-md-offset-3">	
 		<%= form_for(Ad.new, html: { multipart: true }) do |f| %>
 		  <%= render 'shared/error_messages', object: f.object %>
-		  <div class="field">      
-		  	<%= f.label :title %><br/>
-			<%= f.text_field :title %><br/>
-			<%= f.label :description %><br/>
-		    <%= f.text_area :description, placeholder: "Ad Description..." %><br/>
-			<%= f.label :price%><br/>
+		  <div class="field">   
+		  	<%= f.label :title %>
+			<%= f.text_field :title %>  
+			
+    	<% fields_for (@ad, @ad.books.build) do |u| %>        
+		  	<%= f.label :publishers %>
+			<%= f.text_field :publishers %>    
+		  	<%= f.label :authors %>
+			<%= f.text_field :authors %>
+    	<% end %>
+    	
+			<%= f.label :description %>
+		    <%= f.text_area :description, placeholder: "Ad Description..." %>
+			<%= f.label :price%>
 			<%= f.text_field :price %>
 		  </div>
 		  <br/><br/>

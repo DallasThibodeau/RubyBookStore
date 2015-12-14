@@ -8,6 +8,11 @@ class AdsController < ApplicationController
 
   def create
     @ad = current_user.ad.build(ad_params)
+    @ad.book.build
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @patient }
+    end
     if @ad.save!
       flash[:success] = "Ad created!"
       redirect_to home_path

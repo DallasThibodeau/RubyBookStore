@@ -3,7 +3,9 @@ class Ad < ActiveRecord::Base
    @@no_of_ads=0
  
    belongs_to :user             
-   has_one :book, dependent: :destroy               
+   has_one :book, dependent: :destroy     
+   accepts_nested_attributes_for :book 
+   before_create :build_book        
        
     #added for paperclip-drop gem   
     #has_attached_file :picture,
