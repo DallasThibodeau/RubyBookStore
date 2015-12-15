@@ -1,0 +1,28 @@
+<h1>Create A Book</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">	
+		<%= form_for @book do |f|  %>
+		  <%= render 'shared/error_messages', object: f.object %>
+		  <div class="field">   
+		  	<%= f.label :title %></br>
+			<%= f.text_field :title %>
+		  </div>
+		  <div class="field">  
+			<%= f.label :num_of_pages %></br>
+		    <%= f.text_field :num_of_pages %>
+		  </div>
+		  <div class="field">  
+			<%= f.label :edition%></br>
+			<%= f.text_field :edition %>  
+		  </div>
+		  <div class="field">  
+			<%= f.label :isHardcover%></br>
+			<%= f.check_box :isHardcover %>  
+		  </div>
+		  <br/><br/>
+		  	<%= f.submit "Create Book", class: "btn btn-primary" %>
+		  <br/><br/>
+		<% end %>
+  </div>
+</div>
