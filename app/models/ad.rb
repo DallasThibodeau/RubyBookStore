@@ -1,5 +1,4 @@
 class Ad < ActiveRecord::Base
-   include Filterable
    #<!-- Number of ad objects -->
    @@no_of_ads=0
    belongs_to :user, dependent: :destroy 
@@ -14,6 +13,11 @@ class Ad < ActiveRecord::Base
     #  :path => proc { |style| "#{style}/#{id}_#{picture.original_filename}"},       
     #  :unique_filename => true   
     #}
+    
+    def self.search(query)
+    # where(:title, query) -> This would return an exact match of the query
+      where("title like ?", "%#{query}%") 
+    end
     
     has_attached_file :picture,
     :storage => :dropbox,

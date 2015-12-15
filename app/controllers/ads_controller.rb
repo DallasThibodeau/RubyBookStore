@@ -18,19 +18,27 @@ class AdsController < ApplicationController
     end
   end
   
+   def show
+    @ad = Ad.find(params[:ad])
+    @book = Book.find(params[:book])
+   end
+  
   def destroy
     @ad.destroy
     flash[:success] = "Ad deleted"
     redirect_to request.referrer || 'static_pages/home'
   end
   
-  def search
-    @ads = Ad.filter(params.slice(:title, :id, :books_id))
+  def index
+    if params[:search]
+      @ads = Ad.search(params[:search]).order("created_at DESC")
+    else
+      @ads = Ad.order("created_at DESC")
+    end
   end
-
-  private
   
-
+  
+  private
     def ad_params
       params.require(:ad).permit(:title, :price, :description, :picture, :books_id)
     end

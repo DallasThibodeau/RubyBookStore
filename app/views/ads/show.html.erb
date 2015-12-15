@@ -1,0 +1,19 @@
+<p>
+  <span class="content">
+  	<div class="row">
+		<p> <%= @ad.title %></p>
+		<p>Book Title: <%= @book.title %></p>
+		<p>Edition: <%= @book.edition %></p>
+		<p>Number of pages: <%= @book.num_of_pages %></p>
+    	<%= image_tag @ad.picture.url if @ad.picture? %>&nbsp;&nbsp;<br/>
+		<%= @ad.description %><br/>
+    	<p>Posted <%= time_ago_in_words(@ad.created_at) %> ago.</p>
+	</div>
+  </span>
+  
+  <span class="timestamp">
+    <% if current_user?(@ad.user) %>
+      <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</P>

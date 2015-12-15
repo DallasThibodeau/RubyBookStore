@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   
   get 'create_ad' => 'ads#new'
   
-  get 'full_ad' => 'ads#_full_ad'
+  get 'full_ad' => 'ads#show'
+  
+  get 'ads' => 'ads#index'
   
   get 'edit_profile' => 'static_pages#additionalForm'
   
@@ -24,7 +26,9 @@ Rails.application.routes.draw do
   #match 'ads/get/:id' => 'ads#get'
   
   resources :ads,          only: [:create, :destroy]
-  resources :books,        only: [:create, :destroy]
+  resources :books,        only: [:create, :destroy] do member do get :ads
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
