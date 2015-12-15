@@ -10,8 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'home' => 'static_pages#home'
-
   get 'about' => 'static_pages#about'
   
   get 'create_ad' => 'ads#new'
