@@ -5,7 +5,6 @@ class Publisher < ActiveRecord::Base
    #<!-- Accessors -->
 #   attr_accessor :publisher_name
       
-   belongs_to :book
   
    before_save { self.name = name.downcase }
 

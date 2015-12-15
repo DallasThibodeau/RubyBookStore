@@ -7,6 +7,7 @@ class CreateAds < ActiveRecord::Migration
       t.string :title
       t.string :description
       t.belongs_to :user, index: true
+      t.belongs_to :books, index: true
       t.timestamps null: false
     end
   end

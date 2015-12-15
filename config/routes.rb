@@ -14,15 +14,19 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   
-  get 'create_ad' => 'ads#_ad_form'
+  get 'create_ad' => 'ads#new'
+  
   get 'full_ad' => 'ads#_full_ad'
   
   get 'edit_profile' => 'static_pages#additionalForm'
+  
+  get 'new_book' => 'books#new'
   
   #this route is for file downloads 
   #match 'ads/get/:id' => 'ads#get'
   
   resources :ads,          only: [:create, :destroy]
+  resources :books,        only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

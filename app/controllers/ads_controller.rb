@@ -1,4 +1,5 @@
 class AdsController < ApplicationController
+  
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
@@ -7,12 +8,7 @@ class AdsController < ApplicationController
   end
 
   def create
-    @ad = current_user.ad.build(ad_params)
-    @ad.book.build
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @patient }
-    end
+    @ad = current_user.ad.new(ad_params)
     if @ad.save!
       flash[:success] = "Ad created!"
       redirect_to home_path
@@ -21,17 +17,22 @@ class AdsController < ApplicationController
       redirect_to home_path
     end
   end
-
+  
   def destroy
     @ad.destroy
     flash[:success] = "Ad deleted"
     redirect_to request.referrer || 'static_pages/home'
   end
+  
+  def search
+    @ads = Ad.filter(params.slice(:title, :id, :books_id))
+  end
 
   private
+  
 
     def ad_params
-      params.require(:ad).permit(:title, :price, :description, :picture)
+      params.require(:ad).permit(:title, :price, :description, :picture, :books_id)
     end
 
     def correct_user

@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20151214030221) do
     t.string   "title"
     t.string   "description"
     t.integer  "user_id"
+    t.integer  "books_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "picture_file_name"
@@ -26,17 +27,16 @@ ActiveRecord::Schema.define(version: 20151214030221) do
     t.datetime "picture_updated_at"
   end
 
+  add_index "ads", ["books_id"], name: "index_ads_on_books_id"
   add_index "ads", ["user_id"], name: "index_ads_on_user_id"
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "authors", ["book_id"], name: "index_authors_on_book_id"
   add_index "authors", ["last_name"], name: "index_authors_on_last_name", unique: true
 
   create_table "books", force: :cascade do |t|
@@ -44,12 +44,14 @@ ActiveRecord::Schema.define(version: 20151214030221) do
     t.integer  "num_of_pages"
     t.integer  "edition"
     t.boolean  "isHardcover"
-    t.integer  "ad_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "publishers_id"
+    t.integer  "authors_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "books", ["ad_id"], name: "index_books_on_ad_id"
+  add_index "books", ["authors_id"], name: "index_books_on_authors_id"
+  add_index "books", ["publishers_id"], name: "index_books_on_publishers_id"
   add_index "books", ["title"], name: "index_books_on_title", unique: true
 
   create_table "images", force: :cascade do |t|
@@ -63,12 +65,10 @@ ActiveRecord::Schema.define(version: 20151214030221) do
 
   create_table "publishers", force: :cascade do |t|
     t.string   "name"
-    t.integer  "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "publishers", ["book_id"], name: "index_publishers_on_book_id"
   add_index "publishers", ["name"], name: "index_publishers_on_name", unique: true
 
   create_table "users", force: :cascade do |t|

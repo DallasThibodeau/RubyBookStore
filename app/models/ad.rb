@@ -1,11 +1,9 @@
 class Ad < ActiveRecord::Base
+   include Filterable
    #<!-- Number of ad objects -->
    @@no_of_ads=0
- 
-   belongs_to :user             
-   has_one :book, dependent: :destroy     
-   accepts_nested_attributes_for :book 
-   before_create :build_book        
+   belongs_to :user, dependent: :destroy 
+   belongs_to :book, dependent: :destroy             
        
     #added for paperclip-drop gem   
     #has_attached_file :picture,
@@ -35,6 +33,7 @@ class Ad < ActiveRecord::Base
   validates_attachment_size :picture, :less_than => 10.megabytes   
   validates_attachment_presence :picture
   validates :user_id, presence: true
+  validates :books_id, presence: true
  
    
     #validates_attachment_size :picture, :less_than => 10.megabytes   
