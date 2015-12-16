@@ -15,8 +15,13 @@
   
   <span class="timestamp">
     <% if current_user?(@ad.user) %>
-      <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %>
+      <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %><br/><br/>
     <% end %>
+	  <%= link_to "1 Star", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>1}), :method => :post %><br/>
+	  <%= link_to "2 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>2}), :method => :post %><br/>
+	  <%= link_to "3 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>3}), :method => :post %><br/>
+	  <%= link_to "4 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>4}), :method => :post %><br/>
+	  <%= link_to "5 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>5}), :method => :post %><br/>
   </span>
 </P>
 <br/>
@@ -27,6 +32,8 @@
 <%= simple_form_for [@ad, Comment.new] do |f| %>
 <p>
 	<h4>New Comment</h4>
+	<%= f.hidden_field :user_name, :value => @user.nickname%>
+	<%= f.hidden_field :ad_id, :value => @ad.id%>
 	<%= f.input :body, input_html: {rows: "3"}, label: false %><br/>
 </p>
 <p><%= f.submit "Add Comment", class: "btn btn-primary" %></p>

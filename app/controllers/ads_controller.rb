@@ -20,8 +20,15 @@ class AdsController < ApplicationController
   
    def show
     @ad = Ad.find(params[:id])
-    @book = Book.find(params[:book])
-    @user = User.find(params[:user])
+    @book = Book.find(params[:id])
+    @user = User.find(params[:id])
+    @comments = Comment.where("ad_id = ?", @ad.id)
+    @starrating = Starrating.new
+    
+    respond_to do |format|
+      format.html
+      format.json{render json: @ad}
+    end
    end
   
   def destroy

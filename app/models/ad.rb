@@ -3,11 +3,12 @@ class Ad < ActiveRecord::Base
    @@no_of_ads=0
    belongs_to :user, dependent: :destroy 
    belongs_to :book, dependent: :destroy  
-   has_many :comments, dependent: :destroy           
-       
+   has_many :comments, dependent: :destroy
+   has_many :starrating, dependent: :destroy
+      
     #added for paperclip-drop gem   
     #has_attached_file :picture,
-    #:storage => :dropbox,
+    #:storage => :dropbox,s
     #:dropbox_credentials => "#{Rails.root}/config/dropbox_config.yml",
     #:styles => { :medium => "300x300" , :thumb => "100x100>"},    
     #:dropbox_options => {
