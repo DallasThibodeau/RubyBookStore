@@ -6,6 +6,5 @@ class CreateStarratings < ActiveRecord::Migration
       t.integer :raterID
       t.belongs_to :ad, index: true
     end
-  execute "ALTER TABLE words ADD PRIMARY KEY (ownerID,raterID);"
   end
 end

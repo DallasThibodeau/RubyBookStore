@@ -13,6 +13,11 @@ class StarratingsController < ApplicationController
       redirect_to request.referrer || 'static_pages/home'
     end
   end
+  
+  def average_rating
+    starratings.average(:rating)
+  end
+  
   private
 
     def star_params

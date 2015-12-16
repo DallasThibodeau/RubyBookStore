@@ -3,6 +3,8 @@
   	<div class="row">
 		<p> <%= @ad.title %></p>
 		<p>User: <%= @user.nickname %></p>
+		
+			<p>User Rating: <%= @starrating.average(:rating)  %> 
 		<p>Contact: <%= @user.email %></p>
 		<p>Book Title: <%= @book.title %></p>
 		<p>Edition: <%= @book.edition %></p>
