@@ -4,13 +4,16 @@ class BooksController < ApplicationController
     @book = Book.new
   end
   
-  def create
+  def create    
+    if params[:isHardcover] == nil
+     params[:isHardcover] = false
+    end
     @book = Book.new(book_params)
     if @book.save
       flash[:success] = "Book created!"
       redirect_to create_ad_path
     else
-      redirect_to create_ad_path
+      redirect_to new_book_path
     end
   end
   
