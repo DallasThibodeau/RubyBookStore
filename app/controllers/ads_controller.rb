@@ -19,7 +19,6 @@ class AdsController < ApplicationController
   end
   
    def show
-<<<<<<< HEAD
     @ad = Ad.find(params[:id])
     @book = Book.find(params[:id])
     @user = User.find(params[:id])

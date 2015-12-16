@@ -1,6 +1,11 @@
-<% div_for(@comment) do %>
+<%= div_for(comment) do %>
 <p>
-	<strong>Posted <%= time_ago_in_words(@comment.created_at) %></strong><br/>
-	<%= h(@comment.body) %>
+	<strong>Posted <%= time_ago_in_words(comment.created_at) %></strong><br/>
+	<% if comment.user_name == "" %>
+	<h5><strong>Posted By: </strong><%= @user.email %></h5>
+	<% else %>
+		<h5><%= comment.user_name %></h5>
+	<%end%>	
+	<%= h(comment.body) %>
 </p>
 <%end%>
