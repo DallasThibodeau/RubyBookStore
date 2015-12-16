@@ -19,11 +19,12 @@ class AdsController < ApplicationController
   end
   
    def show
+<<<<<<< HEAD
     @ad = Ad.find(params[:id])
     @book = Book.find(params[:id])
     @user = User.find(params[:id])
     @comments = Comment.where("ad_id = ?", @ad.id)
-    @starrating = Starrating.new
+    @starrating = Starrating.where(:ownerID=>@user.id)
     
     respond_to do |format|
       format.html
