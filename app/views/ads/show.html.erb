@@ -1,35 +1,103 @@
+<strong><h1> <%= @ad.title %></h1></strong>
+<div style="float:left; width:70%;">	
+	<%= image_tag @ad.picture.url if @ad.picture? %>
+	<h3><strong>Book Title: </strong><%= @book.title %></h3>
+	<h4><strong>Edition: </strong><%= @book.edition %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Number of pages: </strong><%= @book.num_of_pages %></h4>				
+	<br/>
+	<h3><strong>Decription: </strong></h3><%= @ad.description %><br/></p>
+	<p>Posted <%= time_ago_in_words(@ad.created_at) %> ago.</p>
+	<br/>
+	<%if @user.nickname != ""%>
+		<h4><strong>User: </strong><%= @user.nickname %></h4>
+	<%else%>
+		<h4><strong>User: </strong><%= @user.email%></h4>
+	<%end%>				
+	<h4><strong>Contact: </h4>
+	<strong>Email: </strong><%= @user.email %>
+	<%if @user.phone != ""%>
+	<br/><strong>Phone: </strong><%= @user.phone %>
+	<%end%>			
+	<br/>
+	<br/>		
+	<strong>User Rating: </strong><%= @starrating.average(:rating)%>
+	<br/>
+	<span class="timestamp">
+		<strong>Rate This User:</strong>&nbsp;&nbsp;		
+		<%= link_to "1 Star", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>1}), :method => :post %>&nbsp;&nbsp;
+		<%= link_to "2 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>2}), :method => :post %>&nbsp;&nbsp;
+		<%= link_to "3 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>3}), :method => :post %>&nbsp;&nbsp;
+		<%= link_to "4 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>4}), :method => :post %>&nbsp;&nbsp;
+		<%= link_to "5 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>5}), :method => :post %>		
+		<br/>
+		<br/>
+		<% if current_user?(@ad.user) %>
+		  <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %><br/><br/>
+		<% end %>
+	</span>
+</div>
+<div style="float:left; width:30%;">
+	<h3>Comments</h3>
+	<div id="comments">
+	<%= render :partial => @ad.comments %>
+	</div>	
+	<%= simple_form_for [@ad, Comment.new] do |f| %>
+	<p>
+		<h4>New Comment</h4>
+		<%= f.hidden_field :user_name, :value => @user.nickname%>
+		<%= f.hidden_field :ad_id, :value => @ad.id%>
+		<%= f.input :body, input_html: {rows: "3"}, label: false %><br/>
+	</p>
+	<p><%= f.submit "Add Comment", class: "btn btn-primary" %></p>
+	<%end%>
+</div>
+<!--
 <p>
   <span class="content">
   	<div class="row">
-		<p> <%= @ad.title %></p>
-		<p>User: <%= @user.nickname %></p>
-			<p>User Rating: <%= @starrating.average(:rating)  %> 
-		<p>Contact: <%= @user.email %></p>
-		<p>Book Title: <%= @book.title %></p>
-		<p>Edition: <%= @book.edition %></p>
-		<p>Number of pages: <%= @book.num_of_pages %></p>
-    	<%= image_tag @ad.picture.url if @ad.picture? %>&nbsp;&nbsp;<br/>
-		<p>Decription: <br/><%= @ad.description %><br/></p>
+		<strong><h1> <%= @ad.title %></h1></strong>
+		<h3><strong>Book Title: </strong><%= @book.title %></h3>
+		<%= image_tag @ad.picture.url if @ad.picture? %>&nbsp;&nbsp;
+		<h4><strong>Edition: </strong><%= @book.edition %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Number of pages: </strong><%= @book.num_of_pages %></h4>				
+		<br/>
+		<h3><strong>Decription: </strong></h3><%= @ad.description %><br/></p>
     	<p>Posted <%= time_ago_in_words(@ad.created_at) %> ago.</p>
+    	<br/>
+		<%if @user.nickname != ""%>
+			<h4><strong>User: </strong><%= @user.nickname %></h4>
+		<%else%>
+			<h4><strong>User: </strong><%= @user.email%></h4>
+		<%end%>				
+		<h4><strong>Contact: </h4>
+		<strong>Email: </strong><%= @user.email %>
+		<%if @user.phone != ""%>
+		&nbsp;<strong>Phone: </strong><%= @user.phone %>
+		<%end%>			
+		<br/>
+		<br/>		
+		<strong>User Rating: </strong><%= @starrating.average(:rating)%>
+		<br/>
+		<span class="timestamp">
+			<strong>Rate This User:</strong>&nbsp;&nbsp;		
+			<%= link_to "1 Star", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>1}), :method => :post %>&nbsp;&nbsp;
+			<%= link_to "2 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>2}), :method => :post %>&nbsp;&nbsp;
+			<%= link_to "3 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>3}), :method => :post %>&nbsp;&nbsp;
+			<%= link_to "4 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>4}), :method => :post %>&nbsp;&nbsp;
+			<%= link_to "5 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>5}), :method => :post %>		
+			<br/>
+			<br/>
+			<% if current_user?(@ad.user) %>
+			  <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %><br/><br/>
+			<% end %>
+		</span>
 	</div>
-  </span>
-  
-  <span class="timestamp">
-    <% if current_user?(@ad.user) %>
-      <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %><br/><br/>
-    <% end %>
-	  <%= link_to "1 Star", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>1}), :method => :post %><br/>
-	  <%= link_to "2 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>2}), :method => :post %><br/>
-	  <%= link_to "3 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>3}), :method => :post %><br/>
-	  <%= link_to "4 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>4}), :method => :post %><br/>
-	  <%= link_to "5 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>5}), :method => :post %><br/>
   </span>
 </P>
 <br/>
 <h3>Comments</h3>
 <div id="comments">
-	<%= render :partial => @ad.comments %>
+<%= render :partial => @ad.comments %>
 </div>
+
 <%= simple_form_for [@ad, Comment.new] do |f| %>
 <p>
 	<h4>New Comment</h4>
@@ -39,3 +107,4 @@
 </p>
 <p><%= f.submit "Add Comment", class: "btn btn-primary" %></p>
 <%end%>
+-->

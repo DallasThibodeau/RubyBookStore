@@ -19,9 +19,16 @@ class AdsController < ApplicationController
   end
   
    def show
-    @ad = Ad.find(params[:id])
-    @book = Book.find(params[:id])
-    @user = User.find(params[:id])
+    #If statement becuase Dallas messed up on passing params... Jeez thx Dallas :X 
+    if params[:book] == nil && params[:ad] == nil && params[:user] == nil 
+      @ad = Ad.find(params[:id])
+      @book = Book.find(params[:id])
+      @user = User.find(params[:id])
+    else
+      @ad = Ad.find(params[:ad])
+      @book = Book.find(params[:book])
+      @user = User.find(params[:user])
+    end
     @comments = Comment.where("ad_id = ?", @ad.id)
     @starrating = Starrating.where(:ownerID=>@user.id)
     
