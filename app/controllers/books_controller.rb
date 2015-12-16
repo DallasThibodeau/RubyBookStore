@@ -17,6 +17,12 @@ class BooksController < ApplicationController
     end
   end
   
+  def destroy
+    @book.destroy
+    flash[:success] = "Ad deleted"
+    redirect_to request.referrer || 'static_pages/home'
+  end
+  
   def show
     @book = Book.find(params[:book])
    end

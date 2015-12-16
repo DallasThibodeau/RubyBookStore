@@ -1,8 +1,8 @@
 class Ad < ActiveRecord::Base
    #<!-- Number of ad objects -->
    @@no_of_ads=0
-   belongs_to :user, dependent: :destroy 
-   belongs_to :book, dependent: :destroy  
+   belongs_to :user 
+   belongs_to :book  
    has_many :comments, dependent: :destroy
    has_many :starrating, dependent: :destroy
       
