@@ -27,12 +27,12 @@
   
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off", :required => true %>
+    <%= f.password_field :current_password, autocomplete: "off", :required => 'required' %>
   </div>
   
   <%= resource.errors.full_messages.first if resource.errors.any? %>
   <div class="actions">
-    <%= f.submit "Update" %>&nbsp;&nbsp; <%= button_to "Cancel", create_ad_path, :method => "get" %>
+    <%= f.submit "Update" %>&nbsp;&nbsp; <%= link_to "Cancel", edit_user_registration_path %>
   </div>
   <!--<div class="actions">
   	<%= button_to "Cancel", create_ad_path, :method => "get" %>

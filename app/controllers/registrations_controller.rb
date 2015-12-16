@@ -2,14 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
   
   protected
   
-  def validate_profile
-    @user = User.find(current_user.id)
-    if @user.valid?
-      render 'edit'
-    else
-      render edit_profile_path
-    end
-  end
 =begin  
   def update
     # For Rails 4
