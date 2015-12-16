@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214030221) do
+ActiveRecord::Schema.define(version: 20151216010329) do
 
   create_table "ads", force: :cascade do |t|
     t.string   "price"
@@ -70,6 +70,15 @@ ActiveRecord::Schema.define(version: 20151214030221) do
   end
 
   add_index "publishers", ["name"], name: "index_publishers_on_name", unique: true
+
+  create_table "starrating", force: :cascade do |t|
+    t.float   "rating"
+    t.integer "ownerID"
+    t.integer "raterID"
+    t.integer "ad_id"
+  end
+
+  add_index "starrating", ["ad_id"], name: "index_starrating_on_ad_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
   end
   
+  get 'home' => 'static_pages#home'
+  
   get 'about' => 'static_pages#about'
   
   get 'create_ad' => 'ads#new'
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
   get 'edit_profile' => 'static_pages#additionalForm'
   
   get 'new_book' => 'books#new'
+  
+  post 'rate' => 'starratings#create'
   
   #this route is for file downloads 
   #match 'ads/get/:id' => 'ads#get'
