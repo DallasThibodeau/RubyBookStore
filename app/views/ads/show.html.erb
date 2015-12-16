@@ -2,11 +2,13 @@
   <span class="content">
   	<div class="row">
 		<p> <%= @ad.title %></p>
+		<p>User: <%= @user.nickname %></p>
+		<p>Contact: <%= @user.email %></p>
 		<p>Book Title: <%= @book.title %></p>
 		<p>Edition: <%= @book.edition %></p>
 		<p>Number of pages: <%= @book.num_of_pages %></p>
     	<%= image_tag @ad.picture.url if @ad.picture? %>&nbsp;&nbsp;<br/>
-		<%= @ad.description %><br/>
+		<p>Decription: <br/><%= @ad.description %><br/></p>
     	<p>Posted <%= time_ago_in_words(@ad.created_at) %> ago.</p>
 	</div>
   </span>

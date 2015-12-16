@@ -21,6 +21,7 @@ class AdsController < ApplicationController
    def show
     @ad = Ad.find(params[:ad])
     @book = Book.find(params[:book])
+    @user = User.find(params[:user])
    end
   
   def destroy

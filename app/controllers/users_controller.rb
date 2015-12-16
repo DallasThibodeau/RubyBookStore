@@ -55,6 +55,10 @@ class UsersController < ApplicationController
     redirect_to(root_url) unless current_user?(@user)
   end
   
+  def show
+    @user = user.find(params[:user])
+   end
+  
   private 
   
   def user_params

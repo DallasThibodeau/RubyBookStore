@@ -6,7 +6,7 @@
   </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(ad.created_at) %> ago.
-    <%= link_to "view", full_ad_path(:book=>ad.books_id, :ad=>ad.id)%>
+    <%= link_to "view", full_ad_path(:book=>ad.books_id, :ad=>ad.id, :user=>ad.user_id)%>
     <% if current_user?(ad.user) %>
       <%= link_to "delete", ad, method: :delete, data: { confirm: "You sure?" } %>
     <% end %>

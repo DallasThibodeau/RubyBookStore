@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   #this route is for file downloads 
   #match 'ads/get/:id' => 'ads#get'
   
-  resources :ads,          only: [:create, :destroy]
+  resources :ads,          only: [:create, :destroy] do member do get :user
+    end
+  end
   resources :books,        only: [:create, :destroy] do member do get :ads
     end
   end
