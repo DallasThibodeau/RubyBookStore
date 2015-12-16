@@ -9,13 +9,13 @@ class AdsController < ApplicationController
 
   def create
     @ad = current_user.ad.new(ad_params)
-    if @ad.save!
+    if @ad.save
       flash[:success] = "Ad created!"
       redirect_to home_path
     else
       @feed_items = []
-      redirect_to home_path
-    end
+      render 'new'
+    end    
   end
   
    def show

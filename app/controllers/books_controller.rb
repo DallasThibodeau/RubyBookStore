@@ -13,7 +13,7 @@ class BooksController < ApplicationController
       flash[:success] = "Book created!"
       redirect_to create_ad_path
     else
-      redirect_to new_book_path
+      render 'new'
     end
   end
   
