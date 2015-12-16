@@ -9,13 +9,10 @@ class StarratingsController < ApplicationController
     if @starrating.save
       flash[:success] = "Rating created!"
       redirect_to request.referrer || 'static_pages/home'
+    else
+      redirect_to request.referrer || 'static_pages/home'
     end
   end
-  
-  def show
-    @starrating = Starrating.find(params[:Owner_id])
-  end
-  
   private
 
     def star_params

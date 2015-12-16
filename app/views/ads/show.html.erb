@@ -17,10 +17,10 @@
     <% if current_user?(@ad.user) %>
       <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" } %><br/><br/>
     <% end %>
-	  <%= link_to "1 Star", rate_path(:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>1), :method => :post %><br/>
-	  <%= link_to "2 Stars", rate_path(:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>2), :method => :post %><br/>
-	  <%= link_to "3 Stars", rate_path(:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>3), :method => :post %><br/>
-	  <%= link_to "4 Stars", rate_path(:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>4), :method => :post %><br/>
-	  <%= link_to "5 Stars", rate_path(:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>5), :method => :post %><br/>
+	  <%= link_to "1 Star", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>1}), :method => :post %><br/>
+	  <%= link_to "2 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>2}), :method => :post %><br/>
+	  <%= link_to "3 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>3}), :method => :post %><br/>
+	  <%= link_to "4 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>4}), :method => :post %><br/>
+	  <%= link_to "5 Stars", rate_path(:starrating=>{:ownerID=>@user.id, :raterID=>current_user.id, :ad_id=>@ad.id, :rating=>5}), :method => :post %><br/>
   </span>
 </P>

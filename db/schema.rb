@@ -71,14 +71,14 @@ ActiveRecord::Schema.define(version: 20151216010329) do
 
   add_index "publishers", ["name"], name: "index_publishers_on_name", unique: true
 
-  create_table "starrating", force: :cascade do |t|
+  create_table "starratings", force: :cascade do |t|
     t.float   "rating"
     t.integer "ownerID"
     t.integer "raterID"
     t.integer "ad_id"
   end
 
-  add_index "starrating", ["ad_id"], name: "index_starrating_on_ad_id"
+  add_index "starratings", ["ad_id"], name: "index_starratings_on_ad_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

@@ -22,6 +22,7 @@ class AdsController < ApplicationController
     @ad = Ad.find(params[:ad])
     @book = Book.find(params[:book])
     @user = User.find(params[:user])
+    @starrating = Starrating.new
    end
   
   def destroy
