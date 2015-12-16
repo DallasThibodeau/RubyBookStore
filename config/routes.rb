@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-
+  
   get 'about' => 'static_pages#about'
   
   get 'create_ad' => 'ads#new'
