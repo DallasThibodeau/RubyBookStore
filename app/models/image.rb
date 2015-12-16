@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base 
-    attr_accessible :picture, :verified, :category, :tags, :user_id  
+    #attr_accessible :picture, :verified, :category, :tags, :user_id  
     
     validates :picture, :attachment_presence => true 
     
