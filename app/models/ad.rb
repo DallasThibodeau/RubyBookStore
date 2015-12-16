@@ -2,7 +2,8 @@ class Ad < ActiveRecord::Base
    #<!-- Number of ad objects -->
    @@no_of_ads=0
    belongs_to :user, dependent: :destroy 
-   belongs_to :book, dependent: :destroy             
+   belongs_to :book, dependent: :destroy  
+   has_many :comments, dependent: :destroy           
        
     #added for paperclip-drop gem   
     #has_attached_file :picture,

@@ -19,7 +19,7 @@ class AdsController < ApplicationController
   end
   
    def show
-    @ad = Ad.find(params[:ad])
+    @ad = Ad.find(params[:id])
     @book = Book.find(params[:book])
     @user = User.find(params[:user])
    end

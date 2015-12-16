@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214030221) do
+ActiveRecord::Schema.define(version: 20151216031140) do
 
   create_table "ads", force: :cascade do |t|
     t.string   "price"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 20151214030221) do
   add_index "books", ["authors_id"], name: "index_books_on_authors_id"
   add_index "books", ["publishers_id"], name: "index_books_on_publishers_id"
   add_index "books", ["title"], name: "index_books_on_title", unique: true
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "ad_id"
+    t.text     "body"
+    t.string   "user_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["ad_id"], name: "index_comments_on_ad_id"
 
   create_table "images", force: :cascade do |t|
     t.integer  "ad_id"

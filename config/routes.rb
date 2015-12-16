@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   devise_for :users, :controllers => { registrations: 'registrations' }
   devise_scope :user do
     authenticated :user do
@@ -28,10 +29,14 @@ Rails.application.routes.draw do
   resources :ads,          only: [:create, :destroy] do member do get :user
     end
   end
+  resources :ads do
+    resources :comments
+  end
   resources :books,        only: [:create, :destroy] do member do get :ads
     end
   end
-
+  resources :comments
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -19,3 +19,15 @@
     <% end %>
   </span>
 </P>
+<br/>
+<h3>Comments</h3>
+<div id="comments">
+	<%= render :partial => @ad.comments %>
+</div>
+<%= simple_form_for [@ad, Comment.new] do |f| %>
+<p>
+	<h4>New Comment</h4>
+	<%= f.input :body, input_html: {rows: "3"}, label: false %><br/>
+</p>
+<p><%= f.submit "Add Comment", class: "btn btn-primary" %></p>
+<%end%>

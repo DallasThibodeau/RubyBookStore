@@ -39,6 +39,9 @@ gem 'mini_magick',             '3.8.0'
 gem "paperclip", github: "thoughtbot/paperclip"
 gem "paperclip-dropbox"
 
+#For comments
+gem 'simple_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
