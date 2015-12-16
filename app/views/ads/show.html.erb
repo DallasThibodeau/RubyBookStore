@@ -3,6 +3,7 @@
 	<%= image_tag @ad.picture.url if @ad.picture? %>
 	<h3><strong>Book Title: </strong><%= @book.title %></h3>
 	<h4><strong>Edition: </strong><%= @book.edition %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Number of pages: </strong><%= @book.num_of_pages %></h4>				
+	<h4><strong>Price: </strong><%= '$'+@ad.price %></h4>
 	<br/>
 	<h3><strong>Decription: </strong></h3><%= @ad.description %><br/></p>
 	<p>Posted <%= time_ago_in_words(@ad.created_at) %> ago.</p>
